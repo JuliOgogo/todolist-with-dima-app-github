@@ -54,6 +54,12 @@ export type TaskType = {
     addedDate: string
 }
 
+type GetTasksResponse = {
+    error: string | null
+    totalCount: number
+    items: TaskType[]
+}
+
 export const todolistApi = {
     getTodolists() {
         return instance.get<TodolistType[]>('todo-lists')
@@ -68,7 +74,7 @@ export const todolistApi = {
         return instance.put<ResponseType>(`todo-lists/${todolistId}`, {title: title})
     },
     getTasks(todolistId: string) {
-        return instance.get<TaskType[]>(`todo-lists/${todolistId}/tasks`)
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     deleteTask(todolistId: string, taskId: string) {
         return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
