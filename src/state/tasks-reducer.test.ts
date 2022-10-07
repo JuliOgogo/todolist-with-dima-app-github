@@ -85,7 +85,12 @@ test('correct task should be deleted from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    const action = addTaskAC('juce', 'todolistId2')
+    // const action = addTaskAC('juce', 'todolistId2')
+    const action = addTaskAC({
+        id: 'exists', title: 'juce', status: TaskStatuses.New,
+        description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',
+        todoListId: 'todolistId2', order: 0, addedDate: ''
+    })
 
     const endState = tasksReducer(startState, action)
 
@@ -118,7 +123,8 @@ test('title of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC('new todolist')
+    const action = addTodolistAC({id: 'todolistId3', title: "New Todolist", filter: "all", addedDate: '',
+        order: 0})
 
     const endState = tasksReducer(startState, action)
 

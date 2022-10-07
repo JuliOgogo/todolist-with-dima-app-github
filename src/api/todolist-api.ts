@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const settings = {
     withCredentials: true,
@@ -42,12 +42,12 @@ export enum TaskPriorities {
 }
 
 export type TaskType = {
-    description: string | null
+    description: string
     title: string
     status: TaskStatuses
     priority: TaskPriorities
-    startDate: string | null
-    deadline: string | null
+    startDate: string
+    deadline: string
     id: string
     todoListId: string
     order: number
@@ -58,6 +58,15 @@ type GetTasksResponse = {
     error: string | null
     totalCount: number
     items: TaskType[]
+}
+
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
 }
 
 export const todolistApi = {
@@ -80,9 +89,9 @@ export const todolistApi = {
         return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post(`todo-lists/${todolistId}/tasks`, {title: title})
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
-    updateTask(todolistId: string, taskId: string, title: string) {
-        return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title: title})
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+        return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
