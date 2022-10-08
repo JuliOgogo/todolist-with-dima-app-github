@@ -1,8 +1,7 @@
-import {TasksStateType} from '../App';
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
-import {TaskPriorities, TaskStatuses, TaskType, todolistApi, UpdateTaskModelType} from "../api/todolist-api";
+import {TaskPriorities, TaskStatuses, TaskType, todolistApi, UpdateTaskModelType} from "../../api/todolist-api";
 import {Dispatch} from "redux";
-import {AppRootStateType} from "./store";
+import {AppRootStateType} from "../../app/store";
 
 const initialState: TasksStateType = {}
 
@@ -92,6 +91,9 @@ export const updateTaskТС = (taskId: string, domainModel: UpdateDomainTaskMode
     }
 
 // types
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
 export type UpdateDomainTaskModelType = {
     title?: string
     description?: string

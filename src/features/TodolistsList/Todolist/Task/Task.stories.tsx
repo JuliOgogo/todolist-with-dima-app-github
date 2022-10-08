@@ -3,7 +3,7 @@ import {ComponentStory, ComponentMeta} from '@storybook/react';
 
 import {action} from "@storybook/addon-actions";
 import {Task} from "./Task";
-import {TaskPriorities, TaskStatuses} from "./api/todolist-api";
+import {TaskPriorities, TaskStatuses} from "../../../../api/todolist-api";
 
 export default {
     title: 'TODOLIST/Task Component',
