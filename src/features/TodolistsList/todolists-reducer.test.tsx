@@ -21,11 +21,11 @@ beforeEach(() => {
         startState = [
             {
                 id: todolistId1, title: "What to learn", filter: "all", addedDate: '',
-                order: 0
+                order: 0, entityStatus: 'idle'
             },
             {
                 id: todolistId2, title: "What to buy", filter: "all", addedDate: '',
-                order: 0
+                order: 0, entityStatus: 'idle'
             }
         ]
     }
@@ -41,7 +41,7 @@ test('correct todolist should be removed', () => {
 
 test('correct todolist should be added', () => {
     let newTodolist: TodolistDomainType = {id: 'todolistId3', title: "New Todolist", filter: "all", addedDate: '',
-        order: 0};
+        order: 0, entityStatus: 'idle'};
 
     const endState = todolistsReducer(startState, addTodolistAC(newTodolist))
 
