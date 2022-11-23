@@ -1,26 +1,8 @@
-/*
-.App {
-  padding: 30px;
-  display: flex;
+.loading {
+    position: relative;
+    height: 5px;
 }
 
-.App > div {
-  margin-right: 50px;
+.linearLoading {
+    position: absolute;
 }
-
-.error {
-  border: red 1px solid;
-}
-
-.error-message {
-  color: red;
-}
-
-.active-filter {
-  background-color: aquamarine;
-}
-
-.is-done {
-  opacity: 0.5;
-}
-*/
