@@ -15,3 +15,7 @@ export const AddItemFormExample = Template.bind({});
 AddItemFormExample.args = {
     addItem: action('Clicked form inside form')
 };
+
+export const DisabledAddItemFormExample = () => {
+    return <AddItemForm addItem={action('add item')} disabled={true}/>
+}

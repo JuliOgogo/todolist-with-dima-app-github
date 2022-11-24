@@ -29,6 +29,8 @@ export const changeTodolistTitleAC = (id: string, title: string) =>
 export const changeTodolistFilterAC = (filter: FilterValuesType, id: string) =>
     ({type: 'CHANGE-TODOLIST-FILTER', filter, id} as const)
 export const setTodolistsAC = (todolists: TodolistType[]) => ({type: "SET-TODOLISTS", todolists} as const)
+export const changeTodolistEntityStatusAC = (entityStatus: RequestStatusType, id: string) =>
+    ({type: 'CHANGE-TODOLIST-ENTITY-STATUS', entityStatus, id} as const)
 
 // thunks
 export const fetchTodolistsTC = () => (dispatch: ThunkDispatchType) => {
@@ -76,4 +78,5 @@ type ActionsType =
     | ReturnType<typeof changeTodolistTitleAC>
     | ReturnType<typeof changeTodolistFilterAC>
     | SetTodolistsActionType
+    | ReturnType<typeof changeTodolistEntityStatusAC>
 type ThunkDispatchType = Dispatch<ActionsType | SetStatusActionType>
