@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    addTodolistAC,
+    addTodolistAC, changeTodolistEntityStatusAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
@@ -82,3 +82,11 @@ test('todolists should be set to state', () => {
 
     expect(endState.length).toBe(2);
 });
+
+test('todolist entity status should be changed to loading', () => {
+
+    const endState = todolistsReducer(startState, changeTodolistEntityStatusAC('loading', todolistId2))
+
+    expect(endState[0].entityStatus).toBe('idle')
+    expect(endState[1].entityStatus).toBe('loading')
+})
