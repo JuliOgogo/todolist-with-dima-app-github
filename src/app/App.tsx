@@ -7,6 +7,8 @@ import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
+import {Route, Routes} from "react-router-dom";
+import {Login} from "../features/Login/Login";
 
 type PropsType = {
     demo?: boolean
@@ -34,7 +36,11 @@ function App({demo = false}: PropsType) {
                 {status === 'loading' && <LinearProgress className={'linearLoading'}/>}
             </div>
             <Container fixed>
-                <TodolistsList demo={demo}/>
+                <Routes>
+                    <Route path='/' element={<TodolistsList demo={demo}/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='*' element={<h1>404: PAGE NOT FOUND</h1>} />
+                </Routes>
             </Container>
         </div>
     );
