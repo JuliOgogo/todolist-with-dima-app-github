@@ -39,7 +39,8 @@ const initialGlobalState: AppRootStateType = {
                 todoListId: 'todolistId2', order: 0, addedDate: ''}
         ]
     },
-    applications: {status: 'idle', error: null}
+    applications: {status: 'idle', error: null, isInitialized: false},
+    auth: {isLoggedIn: false}
 }
 
 export const storyBookStore = createStore(rootReducer, initialGlobalState, applyMiddleware(thunk))

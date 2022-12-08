@@ -5,7 +5,8 @@ let initialState: initialStateType
 beforeEach(() => {
     initialState = {
         status: "idle",
-        error: null
+        error: null,
+        isInitialized: false
     }
 })
 

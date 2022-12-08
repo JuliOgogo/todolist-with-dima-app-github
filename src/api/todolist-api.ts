@@ -42,6 +42,9 @@ export const todolistApi = {
 export const authAPI = {
     login(payload: RequestPayloadType) {
         return instance.post<ResponseType<{userId: number}>>('/auth/login', payload)
+    },
+    me() {
+        return instance.get<ResponseType>('/auth/me')
     }
 }
 
@@ -51,14 +54,6 @@ export type RequestPayloadType = {
     rememberMe: boolean
     captcha?: string
 }
-
-/*export type AuthResponseType = {
-    resultCode: number
-    messages: string[]
-    data: {
-        userId?: number
-    }
-}*/
 
 // types
 export type TodolistType = {
