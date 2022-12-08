@@ -17,6 +17,18 @@ export const Login = () => {
             password: '',
             rememberMe: false
         },
+        validate: (values) => {
+            if (!values.email) {
+                return {
+                    email: 'Email is required'
+                }
+            }
+            if (!values.password) {
+                return {
+                    password: 'Password is required'
+                }
+            }
+        },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
@@ -40,10 +52,12 @@ export const Login = () => {
                         <TextField label="Email" margin="normal"
                                    {...formik.getFieldProps('email')}
                         />
+                        {formik.errors.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
                         <TextField type="password" label="Password"
                                    margin="normal"
                                    {...formik.getFieldProps('password')}
                         />
+                        {formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
                         <FormControlLabel label={'Remember me'} control={<Checkbox/>}
                                           {...formik.getFieldProps('rememberMe')}
                         />
