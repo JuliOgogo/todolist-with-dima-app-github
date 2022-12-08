@@ -32,12 +32,33 @@ export const todolistApi = {
         return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
         return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
+
+export const authAPI = {
+    login(payload: RequestPayloadType) {
+        return instance.post<ResponseType<{userId: number}>>('/auth/login', payload)
+    }
+}
+
+export type RequestPayloadType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
+
+/*export type AuthResponseType = {
+    resultCode: number
+    messages: string[]
+    data: {
+        userId?: number
+    }
+}*/
 
 // types
 export type TodolistType = {
@@ -52,12 +73,14 @@ export type ResponseType<D = {}> = {
     fieldsErrors: Array<string>
     data: D
 }
+
 export enum TaskStatuses {
     New,
     InProgress,
     Completed,
     Draft
 }
+
 export enum TaskPriorities {
     Low,
     Middle,
@@ -65,6 +88,7 @@ export enum TaskPriorities {
     Urgently,
     Later
 }
+
 export type TaskType = {
     description: string
     title: string
