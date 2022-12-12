@@ -27,7 +27,22 @@ export const loginTC = (payload: RequestPayloadType) => (dispatch: ThunkDispatch
             if (res.data.resultCode === 0) {
                 dispatch(setAppStatusAC('succeeded'))
                 dispatch(isLoggedInAC(true))
-                alert('yeah')
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch((e) => {
+            handleServerNetworkError(e, dispatch)
+        })
+}
+
+export const logoutTC = () => (dispatch: ThunkDispatchType) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.logout()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setAppStatusAC('succeeded'))
+                dispatch(isLoggedInAC(false))
             } else {
                 handleServerAppError(res.data, dispatch)
             }

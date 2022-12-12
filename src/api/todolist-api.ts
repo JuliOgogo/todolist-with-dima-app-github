@@ -41,10 +41,13 @@ export const todolistApi = {
 
 export const authAPI = {
     login(payload: RequestPayloadType) {
-        return instance.post<ResponseType<{userId: number}>>('/auth/login', payload)
+        return instance.post<ResponseType<{ userId: number }>>('/auth/login', payload)
     },
     me() {
         return instance.get<ResponseType>('/auth/me')
+    },
+    logout() {
+        return instance.delete<ResponseType>('/auth/login')
     }
 }
 

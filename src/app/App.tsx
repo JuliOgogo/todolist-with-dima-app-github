@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {
     AppBar,
@@ -18,6 +18,7 @@ import {AppRootStateType, useAppDispatch} from "./store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
+import {logoutTC} from "../features/Login/auth-reducer";
 
 type PropsType = {
     demo?: boolean
@@ -27,10 +28,15 @@ function App({demo = false}: PropsType) {
 
     const status: RequestStatusType = useSelector<AppRootStateType, RequestStatusType>(state => state.applications.status)
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.applications.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(initializeAppTC())
+    }, [])
+
+    const logoutHandler = useCallback(() => {
+        dispatch(logoutTC())
     }, [])
 
     if (!isInitialized) {
@@ -50,7 +56,7 @@ function App({demo = false}: PropsType) {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
                 </Toolbar>
             </AppBar>
             <div className={'loading'}>
